@@ -181,11 +181,15 @@
     led.second.el
   );
 
+  function setNodeText(node, value) {
+    if (node.textContent !== value) node.textContent = value;
+  }
+
   function renderLed(parts) {
-    led.hour.num.textContent = String(parts.hour).padStart(2, "0");
-    led.minute.num.textContent = parts.minute;
-    led.second.num.textContent = parts.second;
-    led.period.textContent = parts.period || "";
+    setNodeText(led.hour.num, String(parts.hour).padStart(2, "0"));
+    setNodeText(led.minute.num, parts.minute);
+    setNodeText(led.second.num, parts.second);
+    setNodeText(led.period, parts.period || "");
   }
 
   function slotLayout(el, options = {}) {
@@ -196,7 +200,7 @@
     const shortest = Math.min(w, h);
     const padX = Math.max(18, w * (portrait ? 0.07 : 0.045));
     const padY = Math.max(18, h * (portrait ? 0.055 : 0.07));
-    const gap = Math.max(8, shortest * 0.03);
+    const gap = Math.max(8, shortest * 0.03 * (options.gapScale || 1));
     const extraW = options.extraW || 0;
     const availW = Math.max(0, w - padX * 2 - extraW);
     const availH = Math.max(0, h - padY * 2);
@@ -213,7 +217,21 @@
       if (!options.fill) cardW = Math.min(cardW, cardH * 0.92);
     }
 
-    return { portrait, count, cardW, cardH, gap };
+    return {
+      portrait,
+      count,
+      cardW: Math.round(cardW),
+      cardH: Math.round(cardH),
+      gap: Math.round(gap),
+    };
+  }
+
+  function setCssVars(el, vars) {
+    Object.entries(vars).forEach(([name, value]) => {
+      if (el.style.getPropertyValue(name) !== value) {
+        el.style.setProperty(name, value);
+      }
+    });
   }
 
   function layoutLed() {
@@ -221,19 +239,26 @@
     const colonCount = portrait ? 0 : settings.showSeconds ? 2 : 1;
     const colonW = portrait
       ? 0
-      : Math.max(22, Math.min(ledEl.clientWidth, ledEl.clientHeight) * 0.07);
+      : Math.round(
+          Math.max(22, Math.min(ledEl.clientWidth, ledEl.clientHeight) * 0.07)
+        );
+    const needPmRoom =
+      portrait && !settings.use24Hour && mode !== "stopwatch";
     const { cardW, cardH, gap } = slotLayout(ledEl, {
       fill: true,
       extraW: colonW * colonCount,
+      gapScale: needPmRoom ? 5 : 1,
     });
-    const font = Math.min(cardH * 0.9, cardW * 0.56);
+    const font = Math.round(Math.min(cardH * 0.93, cardW * 0.58));
 
-    ledEl.style.setProperty("--gap", `${gap}px`);
-    ledEl.style.setProperty("--card-w", `${cardW}px`);
-    ledEl.style.setProperty("--card-h", `${cardH}px`);
-    ledEl.style.setProperty("--led-font", `${font}px`);
-    ledEl.style.setProperty("--colon-w", `${colonW || Math.max(18, cardW * 0.12)}px`);
-    ledEl.style.setProperty("--led-period", `${Math.max(11, Math.min(cardH, cardW) * 0.1)}px`);
+    setCssVars(ledEl, {
+      "--gap": `${gap}px`,
+      "--card-w": `${cardW}px`,
+      "--card-h": `${cardH}px`,
+      "--led-font": `${font}px`,
+      "--colon-w": `${colonW || Math.max(18, Math.round(cardW * 0.12))}px`,
+      "--led-period": `${Math.max(11, Math.round(Math.min(cardH, cardW) * 0.1))}px`,
+    });
     ledEl.classList.toggle("is-portrait", portrait);
     ledEl.classList.toggle("is-landscape", !portrait);
     ledEl.classList.toggle("fmt-24", settings.use24Hour);
@@ -323,13 +348,15 @@
     const period = Math.max(11, Math.min(cardH, cardW) * 0.1);
     const hinge = Math.max(2, Math.round(cardH * 0.012));
 
-    clockEl.style.setProperty("--gap", `${gap}px`);
-    clockEl.style.setProperty("--card-w", `${cardW}px`);
-    clockEl.style.setProperty("--card-h", `${cardH}px`);
-    clockEl.style.setProperty("--radius", `${radius}px`);
-    clockEl.style.setProperty("--font", `${font}px`);
-    clockEl.style.setProperty("--period", `${period}px`);
-    clockEl.style.setProperty("--hinge-h", `${hinge}px`);
+    setCssVars(clockEl, {
+      "--gap": `${gap}px`,
+      "--card-w": `${cardW}px`,
+      "--card-h": `${cardH}px`,
+      "--radius": `${Math.round(radius)}px`,
+      "--font": `${Math.round(font)}px`,
+      "--period": `${Math.round(period)}px`,
+      "--hinge-h": `${hinge}px`,
+    });
     clockEl.classList.toggle("is-portrait", portrait);
     clockEl.classList.toggle("is-landscape", !portrait);
     clockEl.classList.toggle("fmt-24", settings.use24Hour);
@@ -338,7 +365,7 @@
 
   function render(immediate) {
     applyStyle();
-    layout();
+    if (immediate || settings.style !== "led") layout();
     const parts = displayParts();
     if (settings.style === "led") {
       renderLed(parts);
@@ -502,4 +529,7 @@
   showHint();
   requestWakeLock();
   if (params.get("sheet") === "1") openSheet();
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => render(true));
+  }
 })();

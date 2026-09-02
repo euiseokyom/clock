@@ -2,7 +2,7 @@
   font-family: "DSEG7";
   font-style: italic;
   font-weight: 700;
-  font-display: swap;
+  font-display: block;
   src: url("fonts/DSEG7Classic-BoldItalic.woff2") format("woff2");
 }
 
@@ -110,7 +110,8 @@ body {
   flex: 0 0 auto;
 }
 
-.led-num {
+.led-num,
+.led-colon {
   font-family: "DSEG7", monospace;
   font-style: italic;
   font-weight: 700;
@@ -119,6 +120,9 @@ body {
   line-height: 1;
   color: #e8cf8a;
   letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  filter: contrast(1.5);
 }
 
 .led-colon {
@@ -128,13 +132,6 @@ body {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  font-family: "DSEG7", monospace;
-  font-style: italic;
-  font-weight: 700;
-  font-synthesis: none;
-  font-size: var(--led-font);
-  line-height: 1;
-  color: #e8cf8a;
 }
 
 .led.is-portrait .led-colon {
@@ -155,8 +152,14 @@ body {
   pointer-events: none;
 }
 
+.led.is-portrait .led-period {
+  bottom: auto;
+  top: calc(100% + (var(--gap) - 1em) / 2);
+}
+
 .led.fmt-24 .led-period,
 .led.is-stopwatch .led-period,
+.clock.fmt-24 .period,
 .clock.is-stopwatch .period {
   display: none;
 }
@@ -332,8 +335,8 @@ body {
   pointer-events: none;
 }
 
-.clock.fmt-24 .period {
-  display: none;
+.clock.is-portrait .period {
+  bottom: 4%;
 }
 
 .hinge {

@@ -226,7 +226,7 @@
       fill: true,
       extraW: colonW * colonCount,
     });
-    const font = Math.min(cardH * 0.82, cardW * 0.5);
+    const font = Math.min(cardH * 0.9, cardW * 0.56);
 
     ledEl.style.setProperty("--gap", `${gap}px`);
     ledEl.style.setProperty("--card-w", `${cardW}px`);

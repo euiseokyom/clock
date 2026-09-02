@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Clock" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>Clock</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icon.png" />
+    <link rel="icon" href="icon.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="clock" id="clock" aria-live="polite"></div>
+      <div class="led is-hidden" id="led" aria-live="polite"></div>
+      <p class="hint" id="hint">Tap for stopwatch · Hold for settings</p>
+    </div>
+
+    <div class="sheet" id="sheet" hidden>
+      <button class="sheet-backdrop" id="sheet-backdrop" aria-label="Close settings"></button>
+      <div class="sheet-card" role="dialog" aria-labelledby="sheet-title">
+        <h2 id="sheet-title">Style</h2>
+        <div class="segmented" role="radiogroup" aria-label="Clock style">
+          <button type="button" class="seg" data-style="flip" id="style-flip">Flip</button>
+          <button type="button" class="seg" data-style="led" id="style-led">LED</button>
+        </div>
+        <h2>Time format</h2>
+        <div class="segmented" role="radiogroup" aria-label="Time format">
+          <button type="button" class="seg" data-format="12" id="fmt-12">12-hour</button>
+          <button type="button" class="seg" data-format="24" id="fmt-24">24-hour</button>
+        </div>
+        <h2>Seconds</h2>
+        <div class="segmented" role="radiogroup" aria-label="Show seconds">
+          <button type="button" class="seg" data-seconds="0" id="sec-off">Off</button>
+          <button type="button" class="seg" data-seconds="1" id="sec-on">On</button>
+        </div>
+        <p class="sheet-note" id="install-note" hidden>
+          On iPhone: tap Share, then <strong>Add to Home Screen</strong> so this
+          opens fullscreen like an app.
+        </p>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

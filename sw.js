@@ -1,4 +1,4 @@
-const CACHE = "flip-clock-v21";
+const CACHE = "flip-clock-v22";
 const ASSETS = [
   "./",
   "index.html",
@@ -6,7 +6,7 @@ const ASSETS = [
   "app.js",
   "manifest.json",
   "icon.png",
-  "fonts/DSEG7Classic-BoldItalic.woff2",
+  "fonts/DSEG7Classic-Bold.woff2",
   "fonts/IBMPlexSansCondensed-Light.woff2",
 ];
 

@@ -1,9 +1,9 @@
 @font-face {
   font-family: "DSEG7";
-  font-style: italic;
+  font-style: normal;
   font-weight: 700;
   font-display: block;
-  src: url("fonts/DSEG7Classic-BoldItalic.woff2") format("woff2");
+  src: url("fonts/DSEG7Classic-Bold.woff2") format("woff2");
 }
 
 @font-face {
@@ -124,16 +124,15 @@ body {
 .led-num,
 .led-colon {
   font-family: "DSEG7", monospace;
-  font-style: italic;
+  font-style: normal;
   font-weight: 700;
   font-synthesis: none;
   font-size: var(--led-font);
   line-height: 1;
-  color: #e8cf8a;
+  color: #e6d7a2;
   letter-spacing: 0.02em;
   -webkit-font-smoothing: antialiased;
   text-rendering: geometricPrecision;
-  filter: contrast(1.5);
 }
 
 .led-colon {
@@ -158,7 +157,7 @@ body {
   font-size: var(--led-period, 18px);
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #e8cf8a;
+  color: #e6d7a2;
   line-height: 1;
   pointer-events: none;
 }

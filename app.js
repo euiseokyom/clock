@@ -249,7 +249,7 @@
       extraW: colonW * colonCount,
       gapScale: needPmRoom ? 5 : 1,
     });
-    const font = Math.round(Math.min(cardH * 0.93, cardW * 0.58));
+    const font = Math.round(Math.min(cardH * 0.96, cardW * 0.61));
 
     setCssVars(ledEl, {
       "--gap": `${gap}px`,

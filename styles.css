@@ -9,9 +9,9 @@
 @font-face {
   font-family: "Barlow Condensed";
   font-style: normal;
-  font-weight: 700;
+  font-weight: 300;
   font-display: block;
-  src: url("fonts/BarlowCondensed-Bold.woff2") format("woff2");
+  src: url("fonts/BarlowCondensed-Light.woff2") format("woff2");
 }
 
 :root {
@@ -199,7 +199,7 @@ body {
 .modern-colon {
   font-family: "Barlow Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 300;
   font-synthesis: none;
   font-size: var(--modern-font);
   line-height: 0.85;

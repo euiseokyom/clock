@@ -6,6 +6,7 @@
   const appEl = document.getElementById("app");
   const clockEl = document.getElementById("clock");
   const ledEl = document.getElementById("led");
+  const modernEl = document.getElementById("modern");
   const hintEl = document.getElementById("hint");
   const sheetEl = document.getElementById("sheet");
   const installNoteEl = document.getElementById("install-note");
@@ -13,6 +14,7 @@
   const fmt24 = document.getElementById("fmt-24");
   const styleFlip = document.getElementById("style-flip");
   const styleLed = document.getElementById("style-led");
+  const styleModern = document.getElementById("style-modern");
   const secOff = document.getElementById("sec-off");
   const secOn = document.getElementById("sec-on");
   const themeMeta = document.querySelector('meta[name="theme-color"]');
@@ -29,9 +31,15 @@
   if (params.get("hint") === "0") settings.seenHint = true;
   if (params.get("style") === "led") settings.style = "led";
   if (params.get("style") === "flip") settings.style = "flip";
+  if (params.get("style") === "modern") settings.style = "modern";
 
   let mode = "clock";
   let stopwatchStartedAt = 0;
+
+  function normalizeStyle(value) {
+    if (value === "led" || value === "modern") return value;
+    return "flip";
+  }
 
   function loadSettings() {
     try {
@@ -40,7 +48,7 @@
         use24Hour: Boolean(raw.use24Hour),
         showSeconds: Boolean(raw.showSeconds),
         seenHint: Boolean(raw.seenHint),
-        style: raw.style === "led" ? "led" : "flip",
+        style: normalizeStyle(raw.style),
       };
     } catch {
       return {
@@ -105,6 +113,7 @@
     stopwatchStartedAt = on ? Date.now() : 0;
     clockEl.classList.toggle("is-stopwatch", on);
     ledEl.classList.toggle("is-stopwatch", on);
+    modernEl.classList.toggle("is-stopwatch", on);
   }
 
   function makeUnit(kind) {
@@ -181,6 +190,43 @@
     led.second.el
   );
 
+  function makeModernGroup(kind) {
+    const group = document.createElement("div");
+    group.className = "modern-group";
+    group.dataset.kind = kind;
+    const num = document.createElement("div");
+    num.className = "modern-num";
+    group.append(num);
+    return { el: group, num };
+  }
+
+  function makeModernColon() {
+    const el = document.createElement("div");
+    el.className = "modern-colon";
+    el.textContent = ":";
+    return el;
+  }
+
+  const modern = {
+    hour: makeModernGroup("hour"),
+    minute: makeModernGroup("minute"),
+    second: makeModernGroup("second"),
+    colonHM: makeModernColon(),
+    colonMS: makeModernColon(),
+    period: document.createElement("div"),
+  };
+
+  modern.period.className = "modern-period";
+  modern.hour.el.append(modern.period);
+
+  modernEl.append(
+    modern.hour.el,
+    modern.colonHM,
+    modern.minute.el,
+    modern.colonMS,
+    modern.second.el
+  );
+
   function setNodeText(node, value) {
     if (node.textContent !== value) node.textContent = value;
   }
@@ -190,6 +236,13 @@
     setNodeText(led.minute.num, parts.minute);
     setNodeText(led.second.num, parts.second);
     setNodeText(led.period, parts.period || "");
+  }
+
+  function renderModern(parts) {
+    setNodeText(modern.hour.num, parts.hour);
+    setNodeText(modern.minute.num, parts.minute);
+    setNodeText(modern.second.num, parts.second);
+    setNodeText(modern.period, parts.period || "");
   }
 
   function slotLayout(el, options = {}) {
@@ -266,12 +319,46 @@
     led.colonMS.classList.toggle("is-hidden", !settings.showSeconds);
   }
 
+  function layoutModern() {
+    const portrait = window.innerHeight >= window.innerWidth;
+    const colonCount = portrait ? 0 : settings.showSeconds ? 2 : 1;
+    const colonW = portrait
+      ? 0
+      : Math.round(
+          Math.max(16, Math.min(modernEl.clientWidth, modernEl.clientHeight) * 0.045)
+        );
+    const needPmRoom =
+      portrait && !settings.use24Hour && mode !== "stopwatch";
+    const { cardW, cardH, gap } = slotLayout(modernEl, {
+      fill: true,
+      extraW: colonW * colonCount,
+      gapScale: needPmRoom ? 5 : 1,
+    });
+    const font = Math.round(Math.min(cardH * 0.84, cardW * 0.82));
+
+    setCssVars(modernEl, {
+      "--gap": `${gap}px`,
+      "--card-w": `${cardW}px`,
+      "--card-h": `${cardH}px`,
+      "--modern-font": `${font}px`,
+      "--colon-w": `${colonW || Math.max(14, Math.round(cardW * 0.1))}px`,
+      "--modern-period": `${Math.max(12, Math.round(Math.min(cardH, cardW) * 0.11))}px`,
+    });
+    modernEl.classList.toggle("is-portrait", portrait);
+    modernEl.classList.toggle("is-landscape", !portrait);
+    modernEl.classList.toggle("fmt-24", settings.use24Hour);
+    modern.second.el.classList.toggle("is-hidden", !settings.showSeconds);
+    modern.colonMS.classList.toggle("is-hidden", !settings.showSeconds);
+  }
+
   function applyStyle() {
-    const isLed = settings.style === "led";
-    document.body.classList.toggle("is-led", isLed);
-    document.body.classList.toggle("is-flip", !isLed);
-    clockEl.classList.toggle("is-hidden", isLed);
-    ledEl.classList.toggle("is-hidden", !isLed);
+    const style = normalizeStyle(settings.style);
+    document.body.classList.toggle("is-led", style === "led");
+    document.body.classList.toggle("is-flip", style === "flip");
+    document.body.classList.toggle("is-modern", style === "modern");
+    clockEl.classList.toggle("is-hidden", style !== "flip");
+    ledEl.classList.toggle("is-hidden", style !== "led");
+    modernEl.classList.toggle("is-hidden", style !== "modern");
     if (themeMeta) themeMeta.setAttribute("content", "#000000");
     if (statusMeta) statusMeta.setAttribute("content", "black");
   }
@@ -342,6 +429,10 @@
       layoutLed();
       return;
     }
+    if (settings.style === "modern") {
+      layoutModern();
+      return;
+    }
     const { portrait, cardW, cardH, gap } = slotLayout(clockEl);
     const radius = Math.min(cardW, cardH) * 0.13;
     const font = Math.min(cardH * 0.86, cardW * 0.7);
@@ -365,10 +456,16 @@
 
   function render(immediate) {
     applyStyle();
-    if (immediate || settings.style !== "led") layout();
+    if (immediate || (settings.style !== "led" && settings.style !== "modern")) {
+      layout();
+    }
     const parts = displayParts();
     if (settings.style === "led") {
       renderLed(parts);
+      return;
+    }
+    if (settings.style === "modern") {
+      renderModern(parts);
       return;
     }
     const running = mode === "stopwatch";
@@ -380,8 +477,9 @@
   function syncButtons() {
     fmt12.classList.toggle("selected", !settings.use24Hour);
     fmt24.classList.toggle("selected", settings.use24Hour);
-    styleFlip.classList.toggle("selected", settings.style !== "led");
+    styleFlip.classList.toggle("selected", settings.style === "flip");
     styleLed.classList.toggle("selected", settings.style === "led");
+    styleModern.classList.toggle("selected", settings.style === "modern");
     secOff.classList.toggle("selected", !settings.showSeconds);
     secOn.classList.toggle("selected", settings.showSeconds);
   }
@@ -469,7 +567,7 @@
 
   document.querySelectorAll("[data-style]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      settings.style = btn.dataset.style === "led" ? "led" : "flip";
+      settings.style = normalizeStyle(btn.dataset.style);
       saveSettings();
       syncButtons();
       closeSheet();

@@ -1,4 +1,4 @@
-const CACHE = "flip-clock-v18";
+const CACHE = "flip-clock-v19";
 const ASSETS = [
   "./",
   "index.html",
@@ -7,6 +7,7 @@ const ASSETS = [
   "manifest.json",
   "icon.png",
   "fonts/DSEG7Classic-BoldItalic.woff2",
+  "fonts/BarlowCondensed-Bold.woff2",
 ];
 
 self.addEventListener("install", (event) => {

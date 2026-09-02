@@ -22,6 +22,7 @@
     <div id="app">
       <div class="clock" id="clock" aria-live="polite"></div>
       <div class="led is-hidden" id="led" aria-live="polite"></div>
+      <div class="modern is-hidden" id="modern" aria-live="polite"></div>
       <p class="hint" id="hint">Tap for stopwatch · Hold for settings</p>
     </div>
 
@@ -29,9 +30,10 @@
       <button class="sheet-backdrop" id="sheet-backdrop" aria-label="Close settings"></button>
       <div class="sheet-card" role="dialog" aria-labelledby="sheet-title">
         <h2 id="sheet-title">Style</h2>
-        <div class="segmented" role="radiogroup" aria-label="Clock style">
+        <div class="segmented three" role="radiogroup" aria-label="Clock style">
           <button type="button" class="seg" data-style="flip" id="style-flip">Flip</button>
           <button type="button" class="seg" data-style="led" id="style-led">LED</button>
+          <button type="button" class="seg" data-style="modern" id="style-modern">Modern</button>
         </div>
         <h2>Time format</h2>
         <div class="segmented" role="radiogroup" aria-label="Time format">

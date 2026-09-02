@@ -7,11 +7,11 @@
 }
 
 @font-face {
-  font-family: "Barlow Condensed";
+  font-family: "IBM Plex Sans Condensed";
   font-style: normal;
   font-weight: 300;
   font-display: block;
-  src: url("fonts/BarlowCondensed-Light.woff2") format("woff2");
+  src: url("fonts/IBMPlexSansCondensed-Light.woff2") format("woff2");
 }
 
 :root {
@@ -197,16 +197,18 @@ body {
 
 .modern-num,
 .modern-colon {
-  font-family: "Barlow Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "IBM Plex Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 300;
   font-synthesis: none;
   font-size: var(--modern-font);
   line-height: 0.85;
   color: #f2f2f2;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "kern" 0;
   -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
 }
 
 .modern-colon {

@@ -7,11 +7,11 @@
 }
 
 @font-face {
-  font-family: "Hanken Grotesk";
+  font-family: "Onest";
   font-style: normal;
   font-weight: 300;
   font-display: block;
-  src: url("fonts/HankenGrotesk-Light.woff2") format("woff2");
+  src: url("fonts/Onest-Light.woff2") format("woff2");
 }
 
 :root {
@@ -196,7 +196,7 @@ body {
 
 .modern-num,
 .modern-colon {
-  font-family: "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Onest", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 300;
   font-synthesis: none;

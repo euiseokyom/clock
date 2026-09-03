@@ -7,11 +7,11 @@
 }
 
 @font-face {
-  font-family: "Questrial";
+  font-family: "Jost";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   font-display: block;
-  src: url("fonts/Questrial-Regular.woff2") format("woff2");
+  src: url("fonts/Jost-Light.woff2") format("woff2");
 }
 
 :root {
@@ -196,9 +196,9 @@ body {
 
 .modern-num,
 .modern-colon {
-  font-family: "Questrial", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Jost", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   font-synthesis: none;
   font-size: var(--modern-font);
   line-height: 0.85;

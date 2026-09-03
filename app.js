@@ -348,11 +348,7 @@
       extraW: colonW * colonCount,
       gapScale: needPmRoom ? 5 : 1,
     });
-    const font = Math.round(
-      portrait
-        ? Math.min(cardH * 0.84, cardW * 0.82)
-        : Math.min(cardH * 0.94, cardW * 0.92)
-    );
+    const font = Math.round(Math.min(cardH * 0.84, cardW * 0.82));
 
     setCssVars(modernEl, {
       "--gap": `${gap}px`,
@@ -453,7 +449,9 @@
     }
     const { portrait, cardW, cardH, gap } = slotLayout(clockEl);
     const radius = Math.min(cardW, cardH) * 0.13;
-    const font = Math.min(cardH * 1.0, cardW * 0.82);
+    const font = portrait
+      ? Math.min(cardH * 1.0, cardW * 0.82)
+      : Math.min(cardH * 1.12, cardW * 0.94);
     const period = Math.max(11, Math.min(cardH, cardW) * 0.1);
     const hinge = Math.max(2, Math.round(cardH * 0.012));
 

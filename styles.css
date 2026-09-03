@@ -229,7 +229,7 @@ body {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  font-size: calc(var(--modern-font) * 0.62);
+  font-size: calc(var(--modern-font) * 0.81);
   transform: translateY(-0.08em);
 }
 

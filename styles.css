@@ -1,9 +1,9 @@
 @font-face {
-  font-family: "DSEG7";
+  font-family: "7-Segment";
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   font-display: block;
-  src: url("fonts/DSEG7Classic-Bold.woff2") format("woff2");
+  src: url("fonts/7segment.woff2") format("woff2");
 }
 
 @font-face {
@@ -123,9 +123,9 @@ body {
 
 .led-num,
 .led-colon {
-  font-family: "DSEG7", monospace;
+  font-family: "7-Segment", monospace;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   font-synthesis: none;
   font-size: var(--led-font);
   line-height: 1;

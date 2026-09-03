@@ -1,0 +1,23 @@
+MiSans Latin is a Xiaomi HyperOS font.
+Xiaomi requires that software using it note that MiSans was used.
+
+Source: https://hyperos.mi.com/font/en/
+
+This MiSans Fonts Intellectual Property License Agreement is a legal
+agreement between you and Xiaomi Inc. regarding the installation and
+use of MiSans fonts.
+
+Xiaomi grants a non-transferable, non-exclusive, royalty-free, revocable,
+worldwide copyright license to use MiSans Fonts, provided that:
+
+- You should specifically note in the software that MiSans Fonts was used.
+- You may not adapt or redevelop MiSans Fonts or any of its components.
+- You may not separately lease, sublicense, give, loan or further
+  distribute MiSans Fonts or its components; nor may you redistribute or
+  sell the font software or any copies thereof. This restriction does not
+  apply to any other work you create using MiSans Fonts. If you use
+  MiSans Fonts to create promotional materials, logos, apps, etc., you
+  have the right to distribute or sell such works.
+
+Embedding in software is allowed. Do not change the appearance of the
+glyphs. See https://hyperos.mi.com/font/en/faq/

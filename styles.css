@@ -7,11 +7,11 @@
 }
 
 @font-face {
-  font-family: "Jost";
+  font-family: "MiSans";
   font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
   font-display: block;
-  src: url("fonts/Jost-Light.woff2") format("woff2");
+  src: url("fonts/MiSansLatin-Regular.woff2") format("woff2");
 }
 
 :root {
@@ -196,9 +196,9 @@ body {
 
 .modern-num,
 .modern-colon {
-  font-family: "Jost", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "MiSans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
   font-synthesis: none;
   font-size: var(--modern-font);
   line-height: 0.85;

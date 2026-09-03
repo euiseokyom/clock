@@ -7,11 +7,11 @@
 }
 
 @font-face {
-  font-family: "Jost";
+  font-family: "Hanken Grotesk";
   font-style: normal;
   font-weight: 300;
   font-display: block;
-  src: url("fonts/Jost-Light.woff2") format("woff2");
+  src: url("fonts/HankenGrotesk-Light.woff2") format("woff2");
 }
 
 :root {
@@ -196,7 +196,7 @@ body {
 
 .modern-num,
 .modern-colon {
-  font-family: "Jost", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 300;
   font-synthesis: none;

@@ -203,11 +203,23 @@ body {
   font-size: var(--modern-font);
   line-height: 0.85;
   color: #f2f2f2;
-  letter-spacing: -0.02em;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1, "kern" 0;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "kern" 0, "tnum" 0, "pnum" 1;
   -webkit-font-smoothing: antialiased;
   text-rendering: geometricPrecision;
+}
+
+.modern-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0;
+}
+
+.modern-digit {
+  flex: 0 0 auto;
+  width: 0.62em;
+  text-align: center;
 }
 
 .modern-colon {

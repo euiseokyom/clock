@@ -238,10 +238,24 @@
     setNodeText(led.period, parts.period || "");
   }
 
+  function setModernDigits(node, value) {
+    const text = String(value);
+    if (node.dataset.value === text) return;
+    node.dataset.value = text;
+    node.replaceChildren(
+      ...[...text].map((ch) => {
+        const span = document.createElement("span");
+        span.className = "modern-digit";
+        span.textContent = ch;
+        return span;
+      })
+    );
+  }
+
   function renderModern(parts) {
-    setNodeText(modern.hour.num, parts.hour);
-    setNodeText(modern.minute.num, parts.minute);
-    setNodeText(modern.second.num, parts.second);
+    setModernDigits(modern.hour.num, parts.hour);
+    setModernDigits(modern.minute.num, parts.minute);
+    setModernDigits(modern.second.num, parts.second);
     setNodeText(modern.period, parts.period || "");
   }
 

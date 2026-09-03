@@ -449,7 +449,7 @@
     }
     const { portrait, cardW, cardH, gap } = slotLayout(clockEl);
     const radius = Math.min(cardW, cardH) * 0.13;
-    const font = Math.min(cardH * 1.0, cardW * 0.82);
+    const font = Math.min(cardH * 1.12, cardW * 0.94);
     const period = Math.max(11, Math.min(cardH, cardW) * 0.1);
     const hinge = Math.max(2, Math.round(cardH * 0.012));
 

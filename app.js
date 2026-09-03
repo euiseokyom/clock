@@ -348,7 +348,11 @@
       extraW: colonW * colonCount,
       gapScale: needPmRoom ? 5 : 1,
     });
-    const font = Math.round(Math.min(cardH * 0.84, cardW * 0.82));
+    const font = Math.round(
+      portrait
+        ? Math.min(cardH * 0.84, cardW * 0.82)
+        : Math.min(cardH * 0.94, cardW * 0.92)
+    );
 
     setCssVars(modernEl, {
       "--gap": `${gap}px`,

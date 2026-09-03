@@ -9,9 +9,9 @@
 @font-face {
   font-family: "MiSans";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   font-display: block;
-  src: url("fonts/MiSansLatin-Regular.woff2") format("woff2");
+  src: url("fonts/MiSansLatin-Light.woff2") format("woff2");
 }
 
 :root {
@@ -198,7 +198,7 @@ body {
 .modern-colon {
   font-family: "MiSans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   font-synthesis: none;
   font-size: var(--modern-font);
   line-height: 0.85;

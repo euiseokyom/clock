@@ -229,6 +229,7 @@ body {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
+  transform: translateY(-0.08em);
 }
 
 .modern.is-portrait .modern-colon {
@@ -252,6 +253,7 @@ body {
 .modern.is-portrait .modern-period {
   bottom: auto;
   top: calc(100% + (var(--gap) - 1em) / 2);
+  transform: translateY(-0.28em);
 }
 
 .modern.fmt-24 .modern-period,

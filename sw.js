@@ -1,4 +1,4 @@
-const CACHE = "flip-clock-v34";
+const CACHE = "flip-clock-v35";
 const ASSETS = [
   "./",
   "index.html",
